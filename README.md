@@ -53,7 +53,7 @@ Escribe la lógica en Vanilla JavaScript para añadir efectos visuales a la pág
 ```text
 Añade la lógica funcional en Vanilla JavaScript para el formulario de inscripción. 
 1. Implementa validaciones en tiempo real para todos los campos (nombre, documento, correo, teléfono) usando expresiones regulares.
-2. Crea un catálogo de los 3 lenguajes principales con sus fechas para poblar el selector de talleres.
+2. Crea un catálogo de los 3 lenguajes principales con sus respectivas capacidades (Python: 2 cupos, JavaScript: 8 cupos, HTML & CSS: 10 cupos) y fechas para poblar el selector de talleres.
 3. Añade animaciones de error (como un botón temblando si hay campos vacíos o inválidos al intentar enviar).
 4. Implementa una función para mostrar un modal con un mensaje en pantalla, y añade un efecto de explosión de confeti en la pantalla en caso de una respuesta exitosa.
 ```
