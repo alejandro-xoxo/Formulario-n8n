@@ -1,6 +1,6 @@
 // ═══════════════════════════════════════════════════════
 //  Fundación CodeFuturo – Workshop Registration System
-//  Student‑facing only. Data persisted in localStorage.
+//  Student‑facing only. Data sent to n8n webhook.
 //  Includes: Particles, scroll‑reveal, counter animation,
 //  tilt effect, typing hero text.
 // ═══════════════════════════════════════════════════════
@@ -14,38 +14,20 @@ const WORKSHOPS = [
     name: 'Python Básico',
     icon: '🐍',
     date: '2 de agosto, 2026',
-    capacity: 1,
   },
   {
     id: 'html-css',
     name: 'HTML & CSS',
     icon: '🌐',
     date: '9 de agosto, 2026',
-    capacity: 9,
   },
   {
     id: 'javascript',
     name: 'JavaScript',
     icon: '⚡',
     date: '16 de agosto, 2026',
-    capacity: 7,
   },
 ];
-
-// ─── Storage helpers ───────────────────────────────────
-const STORAGE_KEY = 'codefuturo_registrations';
-
-function getRegistrations() {
-  try {
-    return JSON.parse(localStorage.getItem(STORAGE_KEY)) || [];
-  } catch {
-    return [];
-  }
-}
-
-function saveRegistrations(list) {
-  localStorage.setItem(STORAGE_KEY, JSON.stringify(list));
-}
 
 // ─── DOM references ────────────────────────────────────
 const $  = (sel) => document.querySelector(sel);
@@ -64,23 +46,12 @@ const responseMsg   = $('#responseMessage');
 const responseDet   = $('#responseDetails');
 const btnClose      = $('#btnCloseModal');
 
-// Toast
-const emailToast = $('#emailToast');
-const toastBody  = $('#toastBody');
-
 // ─── Render workshop cards & select options ────────────
 function renderWorkshops() {
-  const regs = getRegistrations();
-
   cardsWrap.innerHTML = '';
   workshopSel.innerHTML = '<option value="" disabled selected>Selecciona un taller</option>';
 
   WORKSHOPS.forEach((ws) => {
-    const enrolled = regs.filter((r) => r.workshopId === ws.id).length;
-    const remaining = ws.capacity - enrolled;
-    const isFull = remaining <= 0;
-    const isLimited = !isFull && remaining <= 5;
-
     // Card
     const card = document.createElement('div');
     card.className = 'workshop-card';
@@ -88,8 +59,8 @@ function renderWorkshops() {
       <div class="card-icon">${ws.icon}</div>
       <div class="card-title">${ws.name}</div>
       <div class="card-date">${ws.date}</div>
-      <div class="card-spots ${isFull ? 'full' : isLimited ? 'limited' : 'available'}">
-        ${isFull ? '❌ Sin cupos' : `✓ ${remaining} cupo${remaining !== 1 ? 's' : ''}`}
+      <div class="card-spots available">
+        ✓ Inscripciones abiertas
       </div>
     `;
     cardsWrap.appendChild(card);
@@ -97,8 +68,7 @@ function renderWorkshops() {
     // Select option
     const opt = document.createElement('option');
     opt.value = ws.id;
-    opt.textContent = `${ws.icon} ${ws.name} — ${ws.date}${isFull ? ' (LLENO)' : ` (${remaining} cupos)`}`;
-    if (isFull) opt.disabled = true;
+    opt.textContent = `${ws.icon} ${ws.name} — ${ws.date}`;
     workshopSel.appendChild(opt);
   });
 
@@ -176,7 +146,18 @@ form.addEventListener('submit', async (e) => {
       throw new Error('Network response was not ok');
     }
 
-    processRegistration();
+    const ws = WORKSHOPS.find((w) => w.id === data.workshopId);
+    
+    showResponse(
+      'success', '🎉', '¡Datos enviados!',
+      `Tus datos para el taller <strong>${ws.name}</strong> han sido recibidos correctamente y están siendo procesados en nuestro sistema. Te contactaremos pronto.`,
+      [
+        { label: 'Taller', value: ws.name },
+        { label: 'Fecha', value: ws.date },
+        { label: 'Participante', value: data.name },
+      ]
+    );
+    form.reset();
   } catch (error) {
     showResponse(
       'error', '😔', 'Error de conexión',
@@ -187,70 +168,6 @@ form.addEventListener('submit', async (e) => {
     btnSubmit.classList.remove('loading');
   }
 });
-
-function processRegistration() {
-  const data = {
-    name:       $('#nombre').value.trim(),
-    document:   $('#documento').value.trim(),
-    email:      $('#correo').value.trim(),
-    phone:      $('#telefono').value.trim(),
-    workshopId: $('#taller').value,
-  };
-
-  const ws = WORKSHOPS.find((w) => w.id === data.workshopId);
-  const regs = getRegistrations();
-
-  // 1️⃣ Duplicate check
-  const alreadyRegistered = regs.some(
-    (r) => r.document === data.document && r.workshopId === data.workshopId
-  );
-
-  if (alreadyRegistered) {
-    showResponse('warning', '⚠️', 'Ya estás inscrito/a',
-      `El documento <strong>${data.document}</strong> ya se encuentra registrado en el taller <strong>${ws.name}</strong>. No es necesario inscribirse de nuevo.`);
-    return;
-  }
-
-  // 2️⃣ Capacity check
-  const enrolled = regs.filter((r) => r.workshopId === data.workshopId).length;
-  if (enrolled >= ws.capacity) {
-    showResponse('error', '😔', 'Taller sin cupos',
-      `Lo sentimos, el taller <strong>${ws.name}</strong> ya alcanzó su capacidad máxima de <strong>${ws.capacity}</strong> participantes. Intenta con otro taller.`);
-    renderWorkshops();
-    return;
-  }
-
-  // 3️⃣ Register
-  const now = new Date();
-  const record = {
-    ...data,
-    date: now.toLocaleDateString('es-CO', { day: '2-digit', month: '2-digit', year: 'numeric' }) +
-          ' ' +
-          now.toLocaleTimeString('es-CO', { hour: '2-digit', minute: '2-digit' }),
-  };
-
-  regs.push(record);
-  saveRegistrations(regs);
-
-  const spotsLeft = ws.capacity - enrolled - 1;
-  showResponse(
-    'success', '🎉', '¡Inscripción confirmada!',
-    `Tu cupo en <strong>${ws.name}</strong> ha sido reservado exitosamente.`,
-    [
-      { label: 'Taller', value: ws.name },
-      { label: 'Fecha', value: ws.date },
-      { label: 'Participante', value: data.name },
-      { label: 'Cupos restantes', value: spotsLeft },
-    ]
-  );
-
-  renderWorkshops();
-
-  // Simulate email toast
-  setTimeout(() => showEmailToast(data, ws), 1200);
-
-  form.reset();
-}
 
 // ─── Response modal ────────────────────────────────────
 function showResponse(type, icon, title, message, details) {
@@ -293,13 +210,6 @@ overlay.addEventListener('click', (e) => {
 document.addEventListener('keydown', (e) => {
   if (e.key === 'Escape' && overlay.classList.contains('visible')) hideResponse();
 });
-
-// ─── Email toast (simulation) ──────────────────────────
-function showEmailToast(data, ws) {
-  toastBody.textContent = `Se envió confirmación a ${data.email} con los detalles del taller "${ws.name}" (${ws.date}).`;
-  emailToast.classList.add('visible');
-  setTimeout(() => emailToast.classList.remove('visible'), 5000);
-}
 
 // ─── Utility ───────────────────────────────────────────
 function escapeHtml(str) {
