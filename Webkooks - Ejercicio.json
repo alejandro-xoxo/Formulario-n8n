@@ -1,0 +1,1484 @@
+{
+  "name": "Webkooks - Ejercicio",
+  "nodes": [
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "loose",
+            "version": 3
+          },
+          "conditions": [
+            {
+              "id": "9ac27c24-f058-41f1-bef2-15eb365faebe",
+              "leftValue": "={{ $json.CC }}",
+              "rightValue": "={{ $('LImpiar Datos').item.json.CC }}",
+              "operator": {
+                "type": "number",
+                "operation": "notEquals"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "looseTypeValidation": true,
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.3,
+      "position": [
+        912,
+        -400
+      ],
+      "id": "2a3e0ea7-5c42-4e5e-9548-31257d38b6ec",
+      "name": "If"
+    },
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "1112091381092h12u13ui2bjk3b1km23k1ñ3k1pom3ñl1m23ñm1ñ3m",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2.1,
+      "position": [
+        0,
+        0
+      ],
+      "id": "c453ab75-6418-42d6-a3af-ed910c606480",
+      "name": "Fromulaario",
+      "webhookId": "b9180bdd-fc2d-44ee-a6a1-6df7df6a7c9c"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "ccb149de-5def-4921-b157-38e2d2dd6ebe",
+              "name": "Nombre",
+              "value": "={{ $json.body.name }}",
+              "type": "string"
+            },
+            {
+              "id": "e73ad9a6-dab0-4b63-b828-43a914a3e442",
+              "name": "CC",
+              "value": "={{ $json.body.document }}",
+              "type": "string"
+            },
+            {
+              "id": "21eaf51d-b361-4d01-aca1-59ab1101065c",
+              "name": "Email",
+              "value": "={{ $json.body.email }}",
+              "type": "string"
+            },
+            {
+              "id": "085738d5-8731-48bc-a6a6-ba8139cf8b4c",
+              "name": "Celular",
+              "value": "={{ $json.body.phone }}",
+              "type": "string"
+            },
+            {
+              "id": "b6cd3524-888a-409c-9706-cda526b76f00",
+              "name": "Curso",
+              "value": "={{ $json.body.workshopId }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        208,
+        0
+      ],
+      "id": "bb8cd361-1d56-4c5f-aece-db943fe7b6ea",
+      "name": "LImpiar Datos"
+    },
+    {
+      "parameters": {
+        "documentId": {
+          "__rl": true,
+          "value": "1Smkp6ehhyqS3T5Wg0V9Cvynt46YILuRbUSLVKA-BPi8",
+          "mode": "list",
+          "cachedResultName": "Formulario_n8n_webhook",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1Smkp6ehhyqS3T5Wg0V9Cvynt46YILuRbUSLVKA-BPi8/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": 1341396507,
+          "mode": "list",
+          "cachedResultName": "HTML & CSS",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1Smkp6ehhyqS3T5Wg0V9Cvynt46YILuRbUSLVKA-BPi8/edit#gid=1341396507"
+        },
+        "filtersUI": {
+          "values": [
+            {
+              "lookupColumn": "CC",
+              "lookupValue": "={{ $json.CC }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        704,
+        -304
+      ],
+      "id": "59cb62c5-e198-4477-ad7d-331dfdff8bb4",
+      "name": "Revisar DB",
+      "alwaysOutputData": true,
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "yraDK6ysJzGMwSoY",
+          "name": "Google Sheets account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "sendTo": "={{ $('LImpiar Datos').item.json.Email }}",
+        "subject": "Corfimacion del Formulario",
+        "message": "=<!DOCTYPE html>\n<html>\n<head>\n    <meta charset=\"UTF-8\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n</head>\n<body style=\"margin: 0; padding: 0; background-color: #07050D; font-family: -apple-system, BlinkMacSystemFont, sans-serif; -webkit-font-smoothing: antialiased;\">\n    \n    <table width=\"100%\" cellpadding=\"0\" cellspacing=\"0\" role=\"presentation\" style=\"background-color: #07050D; padding: 40px 20px;\">\n        <tr>\n            <td align=\"center\">\n                \n                <table width=\"100%\" cellpadding=\"0\" cellspacing=\"0\" role=\"presentation\" style=\"max-width: 500px; background-color: #0E0A14; border: 1px solid #36294C; border-radius: 14px; overflow: hidden; box-shadow: 0 8px 24px rgba(2, 1, 4, 0.6);\">\n                    <tr>\n                        <td align=\"center\" style=\"padding: 40px 30px;\">\n                            \n                            <!-- Icono de Advertencia/Info (Usa el color --color-warning hsl(40, 95%, 55%) -> #F2B707) -->\n                            <div style=\"width: 64px; height: 64px; border-radius: 50%; background-color: rgba(242, 183, 7, 0.12); display: inline-block; margin-bottom: 24px;\">\n                                <table width=\"100%\" height=\"100%\" cellpadding=\"0\" cellspacing=\"0\" role=\"presentation\">\n                                    <tr>\n                                        <td align=\"center\" valign=\"middle\">\n                                            <span style=\"color: #F2B707; font-size: 32px; line-height: 64px; font-weight: bold;\">!</span>\n                                        </td>\n                                    </tr>\n                                </table>\n                            </div>\n\n                            <h1 style=\"margin: 0 0 12px 0; color: #EDEAF0; font-size: 22px; font-weight: 700; letter-spacing: -0.02em;\">¡Ya estás registrado!</h1>\n\n                            <p style=\"margin: 0 0 32px 0; color: #8F8899; font-size: 15px; line-height: 1.6;\">\n                                Hola <strong>{{ $('LImpiar Datos').item.json.Nombre }} </strong>, detectamos que tu documento o correo ya se encuentra activo en nuestro sistema. Aquí están los detalles de tu registro:\n                            </p>\n\n                            <!-- Detalles Dinámicos del Registro -->\n                            <table width=\"100%\" cellpadding=\"0\" cellspacing=\"0\" role=\"presentation\" style=\"background-color: #0A070F; border-radius: 8px; margin-bottom: 32px;\">\n                                <tr>\n                                    <td style=\"padding: 20px;\">\n                                        <table width=\"100%\" cellpadding=\"0\" cellspacing=\"0\" role=\"presentation\">\n                                            <tr>\n                                                <td style=\"padding-bottom: 12px; color: #8F8899; font-size: 14px; border-bottom: 1px solid #36294C;\">Curso Solicitado:</td>\n                                                <td align=\"right\" style=\"padding-bottom: 12px; color: #F2B707; font-size: 14px; font-weight: 600; text-transform: uppercase; border-bottom: 1px solid #36294C;\">{{ $('LImpiar Datos').item.json.Curso }}</td>\n                                            </tr>\n                                            <tr>\n                                                <td style=\"padding: 12px 0; color: #8F8899; font-size: 14px; border-bottom: 1px solid #36294C;\">Documento (CC):</td>\n                                                <td align=\"right\" style=\"padding: 12px 0; color: #EDEAF0; font-size: 14px; font-weight: 500; border-bottom: 1px solid #36294C;\">{{ $('LImpiar Datos').item.json.CC }}</td>\n                                            </tr>\n                                            <tr>\n                                                <td style=\"padding: 12px 0; color: #8F8899; font-size: 14px; border-bottom: 1px solid #36294C;\">Correo:</td>\n                                                <td align=\"right\" style=\"padding: 12px 0; color: #EDEAF0; font-size: 14px; font-weight: 500; border-bottom: 1px solid #36294C;\">{{ $('LImpiar Datos').item.json.Email }}</td>\n                                            </tr>\n                                            <tr>\n                                                <td style=\"padding-top: 12px; color: #8F8899; font-size: 14px;\">Celular:</td>\n                                                <td align=\"right\" style=\"padding-top: 12px; color: #EDEAF0; font-size: 14px; font-weight: 500;\">{{ $('LImpiar Datos').item.json.Celular }}</td>\n                                            </tr>\n                                        </table>\n                                    </td>\n                                </tr>\n                            </table>\n\n                            <!-- Botón de Acción Funcional -->\n                            <table width=\"100%\" cellpadding=\"0\" cellspacing=\"0\" role=\"presentation\">\n                                <tr>\n                                    <td align=\"center\">\n                                        <!-- Redirige al login o a recuperar contraseña -->\n                                        <a href=\"https://tudominio.com/login\" style=\"display: inline-block; background-color: #8D4DF0; color: #FFFFFF; font-size: 15px; font-weight: 600; text-decoration: none; padding: 14px 28px; border-radius: 8px;\">\n                                            Iniciar Sesión\n                                        </a>\n                                    </td>\n                                </tr>\n                            </table>\n\n                        </td>\n                    </tr>\n                </table>\n                \n                <table width=\"100%\" cellpadding=\"0\" cellspacing=\"0\" role=\"presentation\" style=\"max-width: 500px; margin-top: 24px;\">\n                    <tr>\n                        <td align=\"center\" style=\"color: #635C6E; font-size: 12px;\">\n                            Si no reconoces este registro o necesitas ayuda, responde a este correo.\n                        </td>\n                    </tr>\n                </table>\n\n            </td>\n        </tr>\n    </table>\n</body>\n</html>",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.2,
+      "position": [
+        1104,
+        -384
+      ],
+      "id": "29a4d8b0-dd6f-4df5-81b0-0b9fd1ef9d53",
+      "name": "Rechazo por duplicidad",
+      "webhookId": "57f22f8f-3d97-4299-9e0a-d432cb8d78bd",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "NCps3qyyYGco220t",
+          "name": "Gmail account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "sendTo": "={{ $('LImpiar Datos').item.json.Email }}",
+        "subject": "Corfimacion del Formulario",
+        "message": "=<!DOCTYPE html>\n<html>\n<head>\n    <meta charset=\"UTF-8\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n</head>\n<body style=\"margin: 0; padding: 0; background-color: #07050D; font-family: -apple-system, BlinkMacSystemFont, sans-serif; -webkit-font-smoothing: antialiased;\">\n    \n    <table width=\"100%\" cellpadding=\"0\" cellspacing=\"0\" role=\"presentation\" style=\"background-color: #07050D; padding: 40px 20px;\">\n        <tr>\n            <td align=\"center\">\n                \n                <table width=\"100%\" cellpadding=\"0\" cellspacing=\"0\" role=\"presentation\" style=\"max-width: 500px; background-color: #0E0A14; border: 1px solid #36294C; border-radius: 14px; overflow: hidden; box-shadow: 0 8px 24px rgba(2, 1, 4, 0.6);\">\n                    <tr>\n                        <td align=\"center\" style=\"padding: 40px 30px;\">\n                            \n                            <!-- Icono de Éxito -->\n                            <div style=\"width: 64px; height: 64px; border-radius: 50%; background-color: rgba(38, 217, 124, 0.12); display: inline-block; margin-bottom: 24px;\">\n                                <table width=\"100%\" height=\"100%\" cellpadding=\"0\" cellspacing=\"0\" role=\"presentation\">\n                                    <tr>\n                                        <td align=\"center\" valign=\"middle\">\n                                            <span style=\"color: #26D97C; font-size: 32px; line-height: 64px;\">✓</span>\n                                        </td>\n                                    </tr>\n                                </table>\n                            </div>\n\n                            <h1 style=\"margin: 0 0 12px 0; color: #EDEAF0; font-size: 22px; font-weight: 700; letter-spacing: -0.02em;\">¡Registro Confirmado!</h1>\n\n                            <p style=\"margin: 0 0 32px 0; color: #8F8899; font-size: 15px; line-height: 1.6;\">\n                                Hola <strong>{{ $('LImpiar Datos').item.json.Nombre }}</strong>, tu registro ha sido procesado exitosamente en nuestro sistema.\n                            </p>\n\n                            <!-- Detalles Dinámicos del Registro -->\n                            <table width=\"100%\" cellpadding=\"0\" cellspacing=\"0\" role=\"presentation\" style=\"background-color: #0A070F; border-radius: 8px; margin-bottom: 32px;\">\n                                <tr>\n                                    <td style=\"padding: 20px;\">\n                                        <table width=\"100%\" cellpadding=\"0\" cellspacing=\"0\" role=\"presentation\">\n                                            <tr>\n                                                <td style=\"padding-bottom: 12px; color: #8F8899; font-size: 14px; border-bottom: 1px solid #36294C;\">Curso Solicitado:</td>\n                                                <td align=\"right\" style=\"padding-bottom: 12px; color: #26D97C; font-size: 14px; font-weight: 600; text-transform: uppercase; border-bottom: 1px solid #36294C;\">{{ $('LImpiar Datos').item.json.Curso }}</td>\n                                            </tr>\n                                            <tr>\n                                                <td style=\"padding: 12px 0; color: #8F8899; font-size: 14px; border-bottom: 1px solid #36294C;\">Documento (CC):</td>\n                                                <td align=\"right\" style=\"padding: 12px 0; color: #EDEAF0; font-size: 14px; font-weight: 500; border-bottom: 1px solid #36294C;\">{{ $('LImpiar Datos').item.json.CC }}</td>\n                                            </tr>\n                                            <tr>\n                                                <td style=\"padding: 12px 0; color: #8F8899; font-size: 14px; border-bottom: 1px solid #36294C;\">Correo:</td>\n                                                <td align=\"right\" style=\"padding: 12px 0; color: #EDEAF0; font-size: 14px; font-weight: 500; border-bottom: 1px solid #36294C;\">{{ $('LImpiar Datos').item.json.Email }}</td>\n                                            </tr>\n                                            <tr>\n                                                <td style=\"padding-top: 12px; color: #8F8899; font-size: 14px;\">Celular:</td>\n                                                <td align=\"right\" style=\"padding-top: 12px; color: #EDEAF0; font-size: 14px; font-weight: 500;\">{{ $('LImpiar Datos').item.json.Celular }}</td>\n                                            </tr>\n                                        </table>\n                                    </td>\n                                </tr>\n                            </table>\n\n                            <!-- Botón de Acción Funcional -->\n                            <table width=\"100%\" cellpadding=\"0\" cellspacing=\"0\" role=\"presentation\">\n                                <tr>\n                                    <td align=\"center\">\n                                        <!-- El href inyecta el curso en la URL para redirigir al lugar correcto -->\n                                        <a href=\"https://tudominio.com/acceso?curso={{ $('LImpiar Datos').item.json.Curso }}\" style=\"display: inline-block; background-color: #8D4DF0; color: #FFFFFF; font-size: 15px; font-weight: 600; text-decoration: none; padding: 14px 28px; border-radius: 8px;\">\n                                            Acceder al Curso\n                                        </a>\n                                    </td>\n                                </tr>\n                            </table>\n\n                        </td>\n                    </tr>\n                </table>\n                \n                <table width=\"100%\" cellpadding=\"0\" cellspacing=\"0\" role=\"presentation\" style=\"max-width: 500px; margin-top: 24px;\">\n                    <tr>\n                        <td align=\"center\" style=\"color: #635C6E; font-size: 12px;\">\n                            Este es un mensaje automatizado. Por favor, no respondas a este correo.\n                        </td>\n                    </tr>\n                </table>\n\n            </td>\n        </tr>\n    </table>\n</body>\n</html>",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.2,
+      "position": [
+        1824,
+        -752
+      ],
+      "id": "b23e04f3-d51d-452b-9265-f11e96dc93de",
+      "name": "Confirmar registro",
+      "webhookId": "57f22f8f-3d97-4299-9e0a-d432cb8d78bd",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "NCps3qyyYGco220t",
+          "name": "Gmail account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "rules": {
+          "values": [
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "loose",
+                  "version": 3
+                },
+                "conditions": [
+                  {
+                    "leftValue": "={{ $json.Curso }}",
+                    "rightValue": "html-css",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals"
+                    },
+                    "id": "272ccbd0-0945-4ef4-ba91-dbe7b2cff516"
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "HTML & CSS"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "loose",
+                  "version": 3
+                },
+                "conditions": [
+                  {
+                    "id": "a82acf7e-9168-4401-9606-f15a9dec76fc",
+                    "leftValue": "={{ $json.Curso }}",
+                    "rightValue": "javascript",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "javascript"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "loose",
+                  "version": 3
+                },
+                "conditions": [
+                  {
+                    "id": "d6cb20c5-4ae4-47b2-a0ec-e7d3e5d7ef97",
+                    "leftValue": "={{ $json.Curso }}",
+                    "rightValue": "python-basico",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "Python"
+            }
+          ]
+        },
+        "looseTypeValidation": true,
+        "options": {}
+      },
+      "type": "n8n-nodes-base.switch",
+      "typeVersion": 3.4,
+      "position": [
+        416,
+        -16
+      ],
+      "id": "a06d95f2-4920-4546-8df0-4b8286d3db05",
+      "name": "Switch"
+    },
+    {
+      "parameters": {
+        "documentId": {
+          "__rl": true,
+          "value": "1Smkp6ehhyqS3T5Wg0V9Cvynt46YILuRbUSLVKA-BPi8",
+          "mode": "list",
+          "cachedResultName": "Formulario_n8n_webhook",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1Smkp6ehhyqS3T5Wg0V9Cvynt46YILuRbUSLVKA-BPi8/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": 1341396507,
+          "mode": "list",
+          "cachedResultName": "HTML & CSS",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1Smkp6ehhyqS3T5Wg0V9Cvynt46YILuRbUSLVKA-BPi8/edit#gid=1341396507"
+        },
+        "filtersUI": {
+          "values": [
+            {
+              "lookupColumn": "Estado",
+              "lookupValue": "Activo"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        1104,
+        -592
+      ],
+      "id": "fd1f1554-1882-43b8-b137-b8e920eab408",
+      "name": "Consultar Cupos",
+      "alwaysOutputData": true,
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "yraDK6ysJzGMwSoY",
+          "name": "Google Sheets account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 3
+          },
+          "conditions": [
+            {
+              "id": "56ec0263-5485-473b-b9ff-e32fddf7e353",
+              "leftValue": "={{ $json.cuposRestantes }}",
+              "rightValue": 0,
+              "operator": {
+                "type": "number",
+                "operation": "gt"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.3,
+      "position": [
+        1472,
+        -592
+      ],
+      "id": "6087ef63-5c73-4733-8ae6-2634a3ed413e",
+      "name": "If1"
+    },
+    {
+      "parameters": {
+        "jsCode": "// 1. Configuración del límite de cupos (puedes cambiar este número)\nconst MAX_CUPOS = 2; \n\n// 2. Obtener todos los registros devueltos por Google Sheets\nconst registros = $input.all(); \nlet totalActivos = 0;\n\n// 3. Iterar sobre cada registro para contar los 'activos'\nregistros.forEach(fila => {\n    // Se extrae el valor asumiendo que la columna se llama exactamente 'estado'\nconst estadoActual = fila.json.Estado ? fila.json.Estado.toString().toLowerCase().trim() : \"\";\n    \n    if (estadoActual === 'activo') {\n        totalActivos++;\n    }\n});\n\n// 4. Evaluar disponibilidad\nconst hayCupo = totalActivos < MAX_CUPOS;\n\n// 5. Retornar un único objeto con el resumen de la validación\nreturn [{\n    json: {\n        limite: MAX_CUPOS,\n        inscritosActivos: totalActivos,\n        cuposRestantes: MAX_CUPOS - totalActivos,\n        aprobado: hayCupo\n    }\n}];"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1296,
+        -592
+      ],
+      "id": "9b0c7571-d2cf-46a9-8799-7359ed40368f",
+      "name": "Code in JavaScript"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "loose",
+            "version": 3
+          },
+          "conditions": [
+            {
+              "id": "9ac27c24-f058-41f1-bef2-15eb365faebe",
+              "leftValue": "={{ $json.CC }}",
+              "rightValue": "={{ $('LImpiar Datos').item.json.CC }}",
+              "operator": {
+                "type": "number",
+                "operation": "notEquals"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "looseTypeValidation": true,
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.3,
+      "position": [
+        1088,
+        0
+      ],
+      "id": "1371b13b-d29e-4335-8372-1fd591e44efa",
+      "name": "If2"
+    },
+    {
+      "parameters": {
+        "operation": "append",
+        "documentId": {
+          "__rl": true,
+          "value": "1Smkp6ehhyqS3T5Wg0V9Cvynt46YILuRbUSLVKA-BPi8",
+          "mode": "list",
+          "cachedResultName": "Formulario_n8n_webhook",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1Smkp6ehhyqS3T5Wg0V9Cvynt46YILuRbUSLVKA-BPi8/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": 798601518,
+          "mode": "list",
+          "cachedResultName": "JS",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1Smkp6ehhyqS3T5Wg0V9Cvynt46YILuRbUSLVKA-BPi8/edit#gid=798601518"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "CC": "={{ $('LImpiar Datos').item.json.CC }}",
+            "Nombre": "={{ $('LImpiar Datos').item.json.Nombre }}",
+            "Email": "={{ $('LImpiar Datos').item.json.Email }}",
+            "Celular": "={{ $('LImpiar Datos').item.json.Celular }}",
+            "Curso": "={{ $('LImpiar Datos').item.json.Curso }}",
+            "Estado": "Activo"
+          },
+          "matchingColumns": [],
+          "schema": [
+            {
+              "id": "Nombre",
+              "displayName": "Nombre",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "CC",
+              "displayName": "CC",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Email",
+              "displayName": "Email",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Celular",
+              "displayName": "Celular",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Curso",
+              "displayName": "Curso",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Estado",
+              "displayName": "Estado",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        1904,
+        -304
+      ],
+      "id": "226fa2d8-b411-4ae7-8a82-18c95b739946",
+      "name": "Agregar a DB1",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "yraDK6ysJzGMwSoY",
+          "name": "Google Sheets account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "sendTo": "={{ $('LImpiar Datos').item.json.Email }}",
+        "subject": "Corfimacion del Formulario",
+        "message": "=<!DOCTYPE html>\n<html>\n<head>\n    <meta charset=\"UTF-8\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n</head>\n<body style=\"margin: 0; padding: 0; background-color: #07050D; font-family: -apple-system, BlinkMacSystemFont, sans-serif; -webkit-font-smoothing: antialiased;\">\n    \n    <table width=\"100%\" cellpadding=\"0\" cellspacing=\"0\" role=\"presentation\" style=\"background-color: #07050D; padding: 40px 20px;\">\n        <tr>\n            <td align=\"center\">\n                \n                <table width=\"100%\" cellpadding=\"0\" cellspacing=\"0\" role=\"presentation\" style=\"max-width: 500px; background-color: #0E0A14; border: 1px solid #36294C; border-radius: 14px; overflow: hidden; box-shadow: 0 8px 24px rgba(2, 1, 4, 0.6);\">\n                    <tr>\n                        <td align=\"center\" style=\"padding: 40px 30px;\">\n                            \n                            <!-- Icono de Advertencia/Info (Usa el color --color-warning hsl(40, 95%, 55%) -> #F2B707) -->\n                            <div style=\"width: 64px; height: 64px; border-radius: 50%; background-color: rgba(242, 183, 7, 0.12); display: inline-block; margin-bottom: 24px;\">\n                                <table width=\"100%\" height=\"100%\" cellpadding=\"0\" cellspacing=\"0\" role=\"presentation\">\n                                    <tr>\n                                        <td align=\"center\" valign=\"middle\">\n                                            <span style=\"color: #F2B707; font-size: 32px; line-height: 64px; font-weight: bold;\">!</span>\n                                        </td>\n                                    </tr>\n                                </table>\n                            </div>\n\n                            <h1 style=\"margin: 0 0 12px 0; color: #EDEAF0; font-size: 22px; font-weight: 700; letter-spacing: -0.02em;\">¡Ya estás registrado!</h1>\n\n                            <p style=\"margin: 0 0 32px 0; color: #8F8899; font-size: 15px; line-height: 1.6;\">\n                                Hola <strong>{{ $('LImpiar Datos').item.json.Nombre }} </strong>, detectamos que tu documento o correo ya se encuentra activo en nuestro sistema. Aquí están los detalles de tu registro:\n                            </p>\n\n                            <!-- Detalles Dinámicos del Registro -->\n                            <table width=\"100%\" cellpadding=\"0\" cellspacing=\"0\" role=\"presentation\" style=\"background-color: #0A070F; border-radius: 8px; margin-bottom: 32px;\">\n                                <tr>\n                                    <td style=\"padding: 20px;\">\n                                        <table width=\"100%\" cellpadding=\"0\" cellspacing=\"0\" role=\"presentation\">\n                                            <tr>\n                                                <td style=\"padding-bottom: 12px; color: #8F8899; font-size: 14px; border-bottom: 1px solid #36294C;\">Curso Solicitado:</td>\n                                                <td align=\"right\" style=\"padding-bottom: 12px; color: #F2B707; font-size: 14px; font-weight: 600; text-transform: uppercase; border-bottom: 1px solid #36294C;\">{{ $('LImpiar Datos').item.json.Curso }}</td>\n                                            </tr>\n                                            <tr>\n                                                <td style=\"padding: 12px 0; color: #8F8899; font-size: 14px; border-bottom: 1px solid #36294C;\">Documento (CC):</td>\n                                                <td align=\"right\" style=\"padding: 12px 0; color: #EDEAF0; font-size: 14px; font-weight: 500; border-bottom: 1px solid #36294C;\">{{ $('LImpiar Datos').item.json.CC }}</td>\n                                            </tr>\n                                            <tr>\n                                                <td style=\"padding: 12px 0; color: #8F8899; font-size: 14px; border-bottom: 1px solid #36294C;\">Correo:</td>\n                                                <td align=\"right\" style=\"padding: 12px 0; color: #EDEAF0; font-size: 14px; font-weight: 500; border-bottom: 1px solid #36294C;\">{{ $('LImpiar Datos').item.json.Email }}</td>\n                                            </tr>\n                                            <tr>\n                                                <td style=\"padding-top: 12px; color: #8F8899; font-size: 14px;\">Celular:</td>\n                                                <td align=\"right\" style=\"padding-top: 12px; color: #EDEAF0; font-size: 14px; font-weight: 500;\">{{ $('LImpiar Datos').item.json.Celular }}</td>\n                                            </tr>\n                                        </table>\n                                    </td>\n                                </tr>\n                            </table>\n\n                            <!-- Botón de Acción Funcional -->\n                            <table width=\"100%\" cellpadding=\"0\" cellspacing=\"0\" role=\"presentation\">\n                                <tr>\n                                    <td align=\"center\">\n                                        <!-- Redirige al login o a recuperar contraseña -->\n                                        <a href=\"https://tudominio.com/login\" style=\"display: inline-block; background-color: #8D4DF0; color: #FFFFFF; font-size: 15px; font-weight: 600; text-decoration: none; padding: 14px 28px; border-radius: 8px;\">\n                                            Iniciar Sesión\n                                        </a>\n                                    </td>\n                                </tr>\n                            </table>\n\n                        </td>\n                    </tr>\n                </table>\n                \n                <table width=\"100%\" cellpadding=\"0\" cellspacing=\"0\" role=\"presentation\" style=\"max-width: 500px; margin-top: 24px;\">\n                    <tr>\n                        <td align=\"center\" style=\"color: #635C6E; font-size: 12px;\">\n                            Si no reconoces este registro o necesitas ayuda, responde a este correo.\n                        </td>\n                    </tr>\n                </table>\n\n            </td>\n        </tr>\n    </table>\n</body>\n</html>",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.2,
+      "position": [
+        1344,
+        48
+      ],
+      "id": "0483697a-9907-43ee-80b4-0171190d50a7",
+      "name": "Rechazo por duplicidad1",
+      "webhookId": "57f22f8f-3d97-4299-9e0a-d432cb8d78bd",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "NCps3qyyYGco220t",
+          "name": "Gmail account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "sendTo": "={{ $('LImpiar Datos').item.json.Email }}",
+        "subject": "Corfimacion del Formulario",
+        "message": "=<!DOCTYPE html>\n<html>\n<head>\n    <meta charset=\"UTF-8\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n</head>\n<body style=\"margin: 0; padding: 0; background-color: #07050D; font-family: -apple-system, BlinkMacSystemFont, sans-serif; -webkit-font-smoothing: antialiased;\">\n    \n    <table width=\"100%\" cellpadding=\"0\" cellspacing=\"0\" role=\"presentation\" style=\"background-color: #07050D; padding: 40px 20px;\">\n        <tr>\n            <td align=\"center\">\n                \n                <table width=\"100%\" cellpadding=\"0\" cellspacing=\"0\" role=\"presentation\" style=\"max-width: 500px; background-color: #0E0A14; border: 1px solid #36294C; border-radius: 14px; overflow: hidden; box-shadow: 0 8px 24px rgba(2, 1, 4, 0.6);\">\n                    <tr>\n                        <td align=\"center\" style=\"padding: 40px 30px;\">\n                            \n                            <!-- Icono de Éxito -->\n                            <div style=\"width: 64px; height: 64px; border-radius: 50%; background-color: rgba(38, 217, 124, 0.12); display: inline-block; margin-bottom: 24px;\">\n                                <table width=\"100%\" height=\"100%\" cellpadding=\"0\" cellspacing=\"0\" role=\"presentation\">\n                                    <tr>\n                                        <td align=\"center\" valign=\"middle\">\n                                            <span style=\"color: #26D97C; font-size: 32px; line-height: 64px;\">✓</span>\n                                        </td>\n                                    </tr>\n                                </table>\n                            </div>\n\n                            <h1 style=\"margin: 0 0 12px 0; color: #EDEAF0; font-size: 22px; font-weight: 700; letter-spacing: -0.02em;\">¡Registro Confirmado!</h1>\n\n                            <p style=\"margin: 0 0 32px 0; color: #8F8899; font-size: 15px; line-height: 1.6;\">\n                                Hola <strong>{{ $('LImpiar Datos').item.json.Nombre }}</strong>, tu registro ha sido procesado exitosamente en nuestro sistema.\n                            </p>\n\n                            <!-- Detalles Dinámicos del Registro -->\n                            <table width=\"100%\" cellpadding=\"0\" cellspacing=\"0\" role=\"presentation\" style=\"background-color: #0A070F; border-radius: 8px; margin-bottom: 32px;\">\n                                <tr>\n                                    <td style=\"padding: 20px;\">\n                                        <table width=\"100%\" cellpadding=\"0\" cellspacing=\"0\" role=\"presentation\">\n                                            <tr>\n                                                <td style=\"padding-bottom: 12px; color: #8F8899; font-size: 14px; border-bottom: 1px solid #36294C;\">Curso Solicitado:</td>\n                                                <td align=\"right\" style=\"padding-bottom: 12px; color: #26D97C; font-size: 14px; font-weight: 600; text-transform: uppercase; border-bottom: 1px solid #36294C;\">{{ $('LImpiar Datos').item.json.Curso }}</td>\n                                            </tr>\n                                            <tr>\n                                                <td style=\"padding: 12px 0; color: #8F8899; font-size: 14px; border-bottom: 1px solid #36294C;\">Documento (CC):</td>\n                                                <td align=\"right\" style=\"padding: 12px 0; color: #EDEAF0; font-size: 14px; font-weight: 500; border-bottom: 1px solid #36294C;\">{{ $('LImpiar Datos').item.json.CC }}</td>\n                                            </tr>\n                                            <tr>\n                                                <td style=\"padding: 12px 0; color: #8F8899; font-size: 14px; border-bottom: 1px solid #36294C;\">Correo:</td>\n                                                <td align=\"right\" style=\"padding: 12px 0; color: #EDEAF0; font-size: 14px; font-weight: 500; border-bottom: 1px solid #36294C;\">{{ $('LImpiar Datos').item.json.Email }}</td>\n                                            </tr>\n                                            <tr>\n                                                <td style=\"padding-top: 12px; color: #8F8899; font-size: 14px;\">Celular:</td>\n                                                <td align=\"right\" style=\"padding-top: 12px; color: #EDEAF0; font-size: 14px; font-weight: 500;\">{{ $('LImpiar Datos').item.json.Celular }}</td>\n                                            </tr>\n                                        </table>\n                                    </td>\n                                </tr>\n                            </table>\n\n                            <!-- Botón de Acción Funcional -->\n                            <table width=\"100%\" cellpadding=\"0\" cellspacing=\"0\" role=\"presentation\">\n                                <tr>\n                                    <td align=\"center\">\n                                        <!-- El href inyecta el curso en la URL para redirigir al lugar correcto -->\n                                        <a href=\"https://tudominio.com/acceso?curso={{ $('LImpiar Datos').item.json.Curso }}\" style=\"display: inline-block; background-color: #8D4DF0; color: #FFFFFF; font-size: 15px; font-weight: 600; text-decoration: none; padding: 14px 28px; border-radius: 8px;\">\n                                            Acceder al Curso\n                                        </a>\n                                    </td>\n                                </tr>\n                            </table>\n\n                        </td>\n                    </tr>\n                </table>\n                \n                <table width=\"100%\" cellpadding=\"0\" cellspacing=\"0\" role=\"presentation\" style=\"max-width: 500px; margin-top: 24px;\">\n                    <tr>\n                        <td align=\"center\" style=\"color: #635C6E; font-size: 12px;\">\n                            Este es un mensaje automatizado. Por favor, no respondas a este correo.\n                        </td>\n                    </tr>\n                </table>\n\n            </td>\n        </tr>\n    </table>\n</body>\n</html>",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.2,
+      "position": [
+        2128,
+        -304
+      ],
+      "id": "c872a46a-16b1-44a0-a1df-846097b54be8",
+      "name": "Confirmar registro1",
+      "webhookId": "57f22f8f-3d97-4299-9e0a-d432cb8d78bd",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "NCps3qyyYGco220t",
+          "name": "Gmail account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 3
+          },
+          "conditions": [
+            {
+              "id": "56ec0263-5485-473b-b9ff-e32fddf7e353",
+              "leftValue": "={{ $json.cuposRestantes }}",
+              "rightValue": 0,
+              "operator": {
+                "type": "number",
+                "operation": "gt"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.3,
+      "position": [
+        1696,
+        -176
+      ],
+      "id": "64853403-d279-453b-93a8-2e58038674eb",
+      "name": "If3"
+    },
+    {
+      "parameters": {
+        "jsCode": "// 1. Configuración del límite de cupos (puedes cambiar este número)\nconst MAX_CUPOS = 2; \n\n// 2. Obtener todos los registros devueltos por Google Sheets\nconst registros = $input.all(); \nlet totalActivos = 0;\n\n// 3. Iterar sobre cada registro para contar los 'activos'\nregistros.forEach(fila => {\n    // Se extrae el valor asumiendo que la columna se llama exactamente 'estado'\nconst estadoActual = fila.json.Estado ? fila.json.Estado.toString().toLowerCase().trim() : \"\";\n    \n    if (estadoActual === 'activo') {\n        totalActivos++;\n    }\n});\n\n// 4. Evaluar disponibilidad\nconst hayCupo = totalActivos < MAX_CUPOS;\n\n// 5. Retornar un único objeto con el resumen de la validación\nreturn [{\n    json: {\n        limite: MAX_CUPOS,\n        inscritosActivos: totalActivos,\n        cuposRestantes: MAX_CUPOS - totalActivos,\n        aprobado: hayCupo\n    }\n}];"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1488,
+        -176
+      ],
+      "id": "b24887a4-e8ff-401d-8c4a-e14d775a5b25",
+      "name": "Code in JavaScript1"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "loose",
+            "version": 3
+          },
+          "conditions": [
+            {
+              "id": "9ac27c24-f058-41f1-bef2-15eb365faebe",
+              "leftValue": "={{ $json.CC }}",
+              "rightValue": "={{ $('LImpiar Datos').item.json.CC }}",
+              "operator": {
+                "type": "number",
+                "operation": "notEquals"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "looseTypeValidation": true,
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.3,
+      "position": [
+        1008,
+        720
+      ],
+      "id": "583c0242-01ca-4b03-98a2-813c438237f5",
+      "name": "If4"
+    },
+    {
+      "parameters": {
+        "operation": "append",
+        "documentId": {
+          "__rl": true,
+          "value": "1Smkp6ehhyqS3T5Wg0V9Cvynt46YILuRbUSLVKA-BPi8",
+          "mode": "list",
+          "cachedResultName": "Formulario_n8n_webhook",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1Smkp6ehhyqS3T5Wg0V9Cvynt46YILuRbUSLVKA-BPi8/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": 2054181397,
+          "mode": "list",
+          "cachedResultName": "Python",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1Smkp6ehhyqS3T5Wg0V9Cvynt46YILuRbUSLVKA-BPi8/edit#gid=2054181397"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "Nombre": "={{ $('LImpiar Datos').item.json.Nombre }}",
+            "CC": "={{ $('LImpiar Datos').item.json.CC }}",
+            "Email": "={{ $('LImpiar Datos').item.json.Email }}",
+            "Celular": "={{ $('LImpiar Datos').item.json.Celular }}",
+            "Curso": "={{ $('LImpiar Datos').item.json.Curso }}",
+            "Estado": "Activo"
+          },
+          "matchingColumns": [],
+          "schema": [
+            {
+              "id": "Nombre",
+              "displayName": "Nombre",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "CC",
+              "displayName": "CC",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Email",
+              "displayName": "Email",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Celular",
+              "displayName": "Celular",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Curso",
+              "displayName": "Curso",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Estado",
+              "displayName": "Estado",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        1888,
+        400
+      ],
+      "id": "6d264b4e-b426-4f84-88b4-08a0b52624d9",
+      "name": "Agregar a DB2",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "yraDK6ysJzGMwSoY",
+          "name": "Google Sheets account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "documentId": {
+          "__rl": true,
+          "value": "1Smkp6ehhyqS3T5Wg0V9Cvynt46YILuRbUSLVKA-BPi8",
+          "mode": "list",
+          "cachedResultName": "Formulario_n8n_webhook",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1Smkp6ehhyqS3T5Wg0V9Cvynt46YILuRbUSLVKA-BPi8/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": 2054181397,
+          "mode": "list",
+          "cachedResultName": "Python",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1Smkp6ehhyqS3T5Wg0V9Cvynt46YILuRbUSLVKA-BPi8/edit#gid=2054181397"
+        },
+        "filtersUI": {
+          "values": [
+            {
+              "lookupColumn": "CC",
+              "lookupValue": "={{ $json.CC }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        816,
+        528
+      ],
+      "id": "4e5d1502-8680-419d-920a-4858551a7e18",
+      "name": "Revisar DB2",
+      "alwaysOutputData": true,
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "yraDK6ysJzGMwSoY",
+          "name": "Google Sheets account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "sendTo": "={{ $('LImpiar Datos').item.json.Email }}",
+        "subject": "Corfimacion del Formulario",
+        "message": "=<!DOCTYPE html>\n<html>\n<head>\n    <meta charset=\"UTF-8\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n</head>\n<body style=\"margin: 0; padding: 0; background-color: #07050D; font-family: -apple-system, BlinkMacSystemFont, sans-serif; -webkit-font-smoothing: antialiased;\">\n    \n    <table width=\"100%\" cellpadding=\"0\" cellspacing=\"0\" role=\"presentation\" style=\"background-color: #07050D; padding: 40px 20px;\">\n        <tr>\n            <td align=\"center\">\n                \n                <table width=\"100%\" cellpadding=\"0\" cellspacing=\"0\" role=\"presentation\" style=\"max-width: 500px; background-color: #0E0A14; border: 1px solid #36294C; border-radius: 14px; overflow: hidden; box-shadow: 0 8px 24px rgba(2, 1, 4, 0.6);\">\n                    <tr>\n                        <td align=\"center\" style=\"padding: 40px 30px;\">\n                            \n                            <!-- Icono de Advertencia/Info (Usa el color --color-warning hsl(40, 95%, 55%) -> #F2B707) -->\n                            <div style=\"width: 64px; height: 64px; border-radius: 50%; background-color: rgba(242, 183, 7, 0.12); display: inline-block; margin-bottom: 24px;\">\n                                <table width=\"100%\" height=\"100%\" cellpadding=\"0\" cellspacing=\"0\" role=\"presentation\">\n                                    <tr>\n                                        <td align=\"center\" valign=\"middle\">\n                                            <span style=\"color: #F2B707; font-size: 32px; line-height: 64px; font-weight: bold;\">!</span>\n                                        </td>\n                                    </tr>\n                                </table>\n                            </div>\n\n                            <h1 style=\"margin: 0 0 12px 0; color: #EDEAF0; font-size: 22px; font-weight: 700; letter-spacing: -0.02em;\">¡Ya estás registrado!</h1>\n\n                            <p style=\"margin: 0 0 32px 0; color: #8F8899; font-size: 15px; line-height: 1.6;\">\n                                Hola <strong>{{ $('LImpiar Datos').item.json.Nombre }} </strong>, detectamos que tu documento o correo ya se encuentra activo en nuestro sistema. Aquí están los detalles de tu registro:\n                            </p>\n\n                            <!-- Detalles Dinámicos del Registro -->\n                            <table width=\"100%\" cellpadding=\"0\" cellspacing=\"0\" role=\"presentation\" style=\"background-color: #0A070F; border-radius: 8px; margin-bottom: 32px;\">\n                                <tr>\n                                    <td style=\"padding: 20px;\">\n                                        <table width=\"100%\" cellpadding=\"0\" cellspacing=\"0\" role=\"presentation\">\n                                            <tr>\n                                                <td style=\"padding-bottom: 12px; color: #8F8899; font-size: 14px; border-bottom: 1px solid #36294C;\">Curso Solicitado:</td>\n                                                <td align=\"right\" style=\"padding-bottom: 12px; color: #F2B707; font-size: 14px; font-weight: 600; text-transform: uppercase; border-bottom: 1px solid #36294C;\">{{ $('LImpiar Datos').item.json.Curso }}</td>\n                                            </tr>\n                                            <tr>\n                                                <td style=\"padding: 12px 0; color: #8F8899; font-size: 14px; border-bottom: 1px solid #36294C;\">Documento (CC):</td>\n                                                <td align=\"right\" style=\"padding: 12px 0; color: #EDEAF0; font-size: 14px; font-weight: 500; border-bottom: 1px solid #36294C;\">{{ $('LImpiar Datos').item.json.CC }}</td>\n                                            </tr>\n                                            <tr>\n                                                <td style=\"padding: 12px 0; color: #8F8899; font-size: 14px; border-bottom: 1px solid #36294C;\">Correo:</td>\n                                                <td align=\"right\" style=\"padding: 12px 0; color: #EDEAF0; font-size: 14px; font-weight: 500; border-bottom: 1px solid #36294C;\">{{ $('LImpiar Datos').item.json.Email }}</td>\n                                            </tr>\n                                            <tr>\n                                                <td style=\"padding-top: 12px; color: #8F8899; font-size: 14px;\">Celular:</td>\n                                                <td align=\"right\" style=\"padding-top: 12px; color: #EDEAF0; font-size: 14px; font-weight: 500;\">{{ $('LImpiar Datos').item.json.Celular }}</td>\n                                            </tr>\n                                        </table>\n                                    </td>\n                                </tr>\n                            </table>\n\n                            <!-- Botón de Acción Funcional -->\n                            <table width=\"100%\" cellpadding=\"0\" cellspacing=\"0\" role=\"presentation\">\n                                <tr>\n                                    <td align=\"center\">\n                                        <!-- Redirige al login o a recuperar contraseña -->\n                                        <a href=\"https://tudominio.com/login\" style=\"display: inline-block; background-color: #8D4DF0; color: #FFFFFF; font-size: 15px; font-weight: 600; text-decoration: none; padding: 14px 28px; border-radius: 8px;\">\n                                            Iniciar Sesión\n                                        </a>\n                                    </td>\n                                </tr>\n                            </table>\n\n                        </td>\n                    </tr>\n                </table>\n                \n                <table width=\"100%\" cellpadding=\"0\" cellspacing=\"0\" role=\"presentation\" style=\"max-width: 500px; margin-top: 24px;\">\n                    <tr>\n                        <td align=\"center\" style=\"color: #635C6E; font-size: 12px;\">\n                            Si no reconoces este registro o necesitas ayuda, responde a este correo.\n                        </td>\n                    </tr>\n                </table>\n\n            </td>\n        </tr>\n    </table>\n</body>\n</html>",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.2,
+      "position": [
+        1216,
+        736
+      ],
+      "id": "7cd1ddc2-090b-4627-86b0-19c98ccca6c9",
+      "name": "Rechazo por duplicidad2",
+      "webhookId": "57f22f8f-3d97-4299-9e0a-d432cb8d78bd",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "NCps3qyyYGco220t",
+          "name": "Gmail account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "sendTo": "={{ $('LImpiar Datos').item.json.Email }}",
+        "subject": "Corfimacion del Formulario",
+        "message": "=<!DOCTYPE html>\n<html>\n<head>\n    <meta charset=\"UTF-8\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n</head>\n<body style=\"margin: 0; padding: 0; background-color: #07050D; font-family: -apple-system, BlinkMacSystemFont, sans-serif; -webkit-font-smoothing: antialiased;\">\n    \n    <table width=\"100%\" cellpadding=\"0\" cellspacing=\"0\" role=\"presentation\" style=\"background-color: #07050D; padding: 40px 20px;\">\n        <tr>\n            <td align=\"center\">\n                \n                <table width=\"100%\" cellpadding=\"0\" cellspacing=\"0\" role=\"presentation\" style=\"max-width: 500px; background-color: #0E0A14; border: 1px solid #36294C; border-radius: 14px; overflow: hidden; box-shadow: 0 8px 24px rgba(2, 1, 4, 0.6);\">\n                    <tr>\n                        <td align=\"center\" style=\"padding: 40px 30px;\">\n                            \n                            <!-- Icono de Éxito -->\n                            <div style=\"width: 64px; height: 64px; border-radius: 50%; background-color: rgba(38, 217, 124, 0.12); display: inline-block; margin-bottom: 24px;\">\n                                <table width=\"100%\" height=\"100%\" cellpadding=\"0\" cellspacing=\"0\" role=\"presentation\">\n                                    <tr>\n                                        <td align=\"center\" valign=\"middle\">\n                                            <span style=\"color: #26D97C; font-size: 32px; line-height: 64px;\">✓</span>\n                                        </td>\n                                    </tr>\n                                </table>\n                            </div>\n\n                            <h1 style=\"margin: 0 0 12px 0; color: #EDEAF0; font-size: 22px; font-weight: 700; letter-spacing: -0.02em;\">¡Registro Confirmado!</h1>\n\n                            <p style=\"margin: 0 0 32px 0; color: #8F8899; font-size: 15px; line-height: 1.6;\">\n                                Hola <strong>{{ $('LImpiar Datos').item.json.Nombre }}</strong>, tu registro ha sido procesado exitosamente en nuestro sistema.\n                            </p>\n\n                            <!-- Detalles Dinámicos del Registro -->\n                            <table width=\"100%\" cellpadding=\"0\" cellspacing=\"0\" role=\"presentation\" style=\"background-color: #0A070F; border-radius: 8px; margin-bottom: 32px;\">\n                                <tr>\n                                    <td style=\"padding: 20px;\">\n                                        <table width=\"100%\" cellpadding=\"0\" cellspacing=\"0\" role=\"presentation\">\n                                            <tr>\n                                                <td style=\"padding-bottom: 12px; color: #8F8899; font-size: 14px; border-bottom: 1px solid #36294C;\">Curso Solicitado:</td>\n                                                <td align=\"right\" style=\"padding-bottom: 12px; color: #26D97C; font-size: 14px; font-weight: 600; text-transform: uppercase; border-bottom: 1px solid #36294C;\">{{ $('LImpiar Datos').item.json.Curso }}</td>\n                                            </tr>\n                                            <tr>\n                                                <td style=\"padding: 12px 0; color: #8F8899; font-size: 14px; border-bottom: 1px solid #36294C;\">Documento (CC):</td>\n                                                <td align=\"right\" style=\"padding: 12px 0; color: #EDEAF0; font-size: 14px; font-weight: 500; border-bottom: 1px solid #36294C;\">{{ $('LImpiar Datos').item.json.CC }}</td>\n                                            </tr>\n                                            <tr>\n                                                <td style=\"padding: 12px 0; color: #8F8899; font-size: 14px; border-bottom: 1px solid #36294C;\">Correo:</td>\n                                                <td align=\"right\" style=\"padding: 12px 0; color: #EDEAF0; font-size: 14px; font-weight: 500; border-bottom: 1px solid #36294C;\">{{ $('LImpiar Datos').item.json.Email }}</td>\n                                            </tr>\n                                            <tr>\n                                                <td style=\"padding-top: 12px; color: #8F8899; font-size: 14px;\">Celular:</td>\n                                                <td align=\"right\" style=\"padding-top: 12px; color: #EDEAF0; font-size: 14px; font-weight: 500;\">{{ $('LImpiar Datos').item.json.Celular }}</td>\n                                            </tr>\n                                        </table>\n                                    </td>\n                                </tr>\n                            </table>\n\n                            <!-- Botón de Acción Funcional -->\n                            <table width=\"100%\" cellpadding=\"0\" cellspacing=\"0\" role=\"presentation\">\n                                <tr>\n                                    <td align=\"center\">\n                                        <!-- El href inyecta el curso en la URL para redirigir al lugar correcto -->\n                                        <a href=\"https://tudominio.com/acceso?curso={{ $('LImpiar Datos').item.json.Curso }}\" style=\"display: inline-block; background-color: #8D4DF0; color: #FFFFFF; font-size: 15px; font-weight: 600; text-decoration: none; padding: 14px 28px; border-radius: 8px;\">\n                                            Acceder al Curso\n                                        </a>\n                                    </td>\n                                </tr>\n                            </table>\n\n                        </td>\n                    </tr>\n                </table>\n                \n                <table width=\"100%\" cellpadding=\"0\" cellspacing=\"0\" role=\"presentation\" style=\"max-width: 500px; margin-top: 24px;\">\n                    <tr>\n                        <td align=\"center\" style=\"color: #635C6E; font-size: 12px;\">\n                            Este es un mensaje automatizado. Por favor, no respondas a este correo.\n                        </td>\n                    </tr>\n                </table>\n\n            </td>\n        </tr>\n    </table>\n</body>\n</html>",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.2,
+      "position": [
+        2112,
+        400
+      ],
+      "id": "e83762be-e2d0-4eff-b421-b86d9bcca3fc",
+      "name": "Confirmar registro2",
+      "webhookId": "57f22f8f-3d97-4299-9e0a-d432cb8d78bd",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "NCps3qyyYGco220t",
+          "name": "Gmail account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "documentId": {
+          "__rl": true,
+          "value": "1Smkp6ehhyqS3T5Wg0V9Cvynt46YILuRbUSLVKA-BPi8",
+          "mode": "list",
+          "cachedResultName": "Formulario_n8n_webhook",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1Smkp6ehhyqS3T5Wg0V9Cvynt46YILuRbUSLVKA-BPi8/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": 2054181397,
+          "mode": "list",
+          "cachedResultName": "Python",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1Smkp6ehhyqS3T5Wg0V9Cvynt46YILuRbUSLVKA-BPi8/edit#gid=2054181397"
+        },
+        "filtersUI": {
+          "values": [
+            {
+              "lookupColumn": "Estado",
+              "lookupValue": "Activo"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        1152,
+        528
+      ],
+      "id": "d4ff2fe6-33be-42ac-890d-d48c626f17a5",
+      "name": "Consultar Cupos2",
+      "alwaysOutputData": true,
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "yraDK6ysJzGMwSoY",
+          "name": "Google Sheets account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 3
+          },
+          "conditions": [
+            {
+              "id": "56ec0263-5485-473b-b9ff-e32fddf7e353",
+              "leftValue": "={{ $json.cuposRestantes }}",
+              "rightValue": 0,
+              "operator": {
+                "type": "number",
+                "operation": "gt"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.3,
+      "position": [
+        1632,
+        528
+      ],
+      "id": "13a3ed12-00f2-471a-b64d-390c1fbd5d55",
+      "name": "If5"
+    },
+    {
+      "parameters": {
+        "jsCode": "// 1. Configuración del límite de cupos (puedes cambiar este número)\nconst MAX_CUPOS = 2; \n\n// 2. Obtener todos los registros devueltos por Google Sheets\nconst registros = $input.all(); \nlet totalActivos = 0;\n\n// 3. Iterar sobre cada registro para contar los 'activos'\nregistros.forEach(fila => {\n    // Se extrae el valor asumiendo que la columna se llama exactamente 'estado'\nconst estadoActual = fila.json.Estado ? fila.json.Estado.toString().toLowerCase().trim() : \"\";\n    \n    if (estadoActual === 'activo') {\n        totalActivos++;\n    }\n});\n\n// 4. Evaluar disponibilidad\nconst hayCupo = totalActivos < MAX_CUPOS;\n\n// 5. Retornar un único objeto con el resumen de la validación\nreturn [{\n    json: {\n        limite: MAX_CUPOS,\n        inscritosActivos: totalActivos,\n        cuposRestantes: MAX_CUPOS - totalActivos,\n        aprobado: hayCupo\n    }\n}];"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1408,
+        528
+      ],
+      "id": "e948215a-de7e-4a9c-911c-f8beeddd2ecd",
+      "name": "Code in JavaScript2"
+    },
+    {
+      "parameters": {
+        "sendTo": "={{ $('LImpiar Datos').item.json.Email }}",
+        "subject": "Corfimacio del Formulario",
+        "message": "=<!DOCTYPE html>\n<html>\n<head>\n    <meta charset=\"UTF-8\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n</head>\n<body style=\"margin: 0; padding: 0; background-color: #07050D; font-family: -apple-system, BlinkMacSystemFont, sans-serif; -webkit-font-smoothing: antialiased;\">\n    \n    <table width=\"100%\" cellpadding=\"0\" cellspacing=\"0\" role=\"presentation\" style=\"background-color: #07050D; padding: 40px 20px;\">\n        <tr>\n            <td align=\"center\">\n                \n                <table width=\"100%\" cellpadding=\"0\" cellspacing=\"0\" role=\"presentation\" style=\"max-width: 500px; background-color: #0E0A14; border: 1px solid #36294C; border-radius: 14px; overflow: hidden; box-shadow: 0 8px 24px rgba(2, 1, 4, 0.6);\">\n                    <tr>\n                        <td align=\"center\" style=\"padding: 40px 30px;\">\n                            \n                            <!-- Icono de Error (Usa el color --color-error hsl(0, 75%, 60%) -> #E64D4D) -->\n                            <div style=\"width: 64px; height: 64px; border-radius: 50%; background-color: rgba(230, 77, 77, 0.12); display: inline-block; margin-bottom: 24px;\">\n                                <table width=\"100%\" height=\"100%\" cellpadding=\"0\" cellspacing=\"0\" role=\"presentation\">\n                                    <tr>\n                                        <td align=\"center\" valign=\"middle\">\n                                            <span style=\"color: #E64D4D; font-size: 28px; line-height: 64px; font-weight: bold;\">✕</span>\n                                        </td>\n                                    </tr>\n                                </table>\n                            </div>\n\n                            <h1 style=\"margin: 0 0 12px 0; color: #EDEAF0; font-size: 22px; font-weight: 700; letter-spacing: -0.02em;\">¡Cupos Agotados!</h1>\n\n                            <p style=\"margin: 0 0 32px 0; color: #8F8899; font-size: 15px; line-height: 1.6;\">\n                                Hola <strong>{{ $('LImpiar Datos').item.json.Nombre }}</strong>, lo sentimos mucho. El taller al que intentas inscribirte ya ha alcanzado su límite máximo de participantes y no podemos procesar tu registro.\n                            </p>\n\n                            <!-- Detalles Dinámicos del Registro -->\n                            <table width=\"100%\" cellpadding=\"0\" cellspacing=\"0\" role=\"presentation\" style=\"background-color: #0A070F; border-radius: 8px; margin-bottom: 32px;\">\n                                <tr>\n                                    <td style=\"padding: 20px;\">\n                                        <table width=\"100%\" cellpadding=\"0\" cellspacing=\"0\" role=\"presentation\">\n                                            <tr>\n                                                <td style=\"padding-bottom: 12px; color: #8F8899; font-size: 14px; border-bottom: 1px solid #36294C;\">Curso Solicitado:</td>\n                                                <td align=\"right\" style=\"padding-bottom: 12px; color: #E64D4D; font-size: 14px; font-weight: 600; text-transform: uppercase; border-bottom: 1px solid #36294C;\">{{ $('LImpiar Datos').item.json.Curso }}</td>\n                                            </tr>\n                                            <tr>\n                                                <td style=\"padding: 12px 0; color: #8F8899; font-size: 14px; border-bottom: 1px solid #36294C;\">Estado de Solicitud:</td>\n                                                <td align=\"right\" style=\"padding: 12px 0; color: #E64D4D; font-size: 14px; font-weight: 500; border-bottom: 1px solid #36294C;\">Rechazado - Sin cupos</td>\n                                            </tr>\n                                            <tr>\n                                                <td style=\"padding-top: 12px; color: #8F8899; font-size: 14px;\">Fecha de intento:</td>\n                                                <td align=\"right\" style=\"padding-top: 12px; color: #EDEAF0; font-size: 14px; font-weight: 500;\">{{ $now.format('MM-DD HH:mm') }}</td>\n                                            </tr>\n                                        </table>\n                                    </td>\n                                </tr>\n                            </table>\n\n                            <!-- Botón de Acción Funcional -->\n                            <table width=\"100%\" cellpadding=\"0\" cellspacing=\"0\" role=\"presentation\">\n                                <tr>\n                                    <td align=\"center\">\n                                        <!-- Redirige a ver otros cursos disponibles -->\n                                        <a href=\"https://alejandro-xoxo.github.io/Formulario-n8n/\" style=\"display: inline-block; background-color: #8D4DF0; color: #FFFFFF; font-size: 15px; font-weight: 600; text-decoration: none; padding: 14px 28px; border-radius: 8px;\">\n                                            Ver otros talleres\n                                        </a>\n                                    </td>\n                                </tr>\n                            </table>\n\n                        </td>\n                    </tr>\n                </table>\n                \n                <table width=\"100%\" cellpadding=\"0\" cellspacing=\"0\" role=\"presentation\" style=\"max-width: 500px; margin-top: 24px;\">\n                    <tr>\n                        <td align=\"center\" style=\"color: #635C6E; font-size: 12px;\">\n                            Si crees que esto es un error o deseas entrar a la lista de espera, responde a este correo.\n                        </td>\n                    </tr>\n                </table>\n\n            </td>\n        </tr>\n    </table>\n</body>\n</html>",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.2,
+      "position": [
+        1904,
+        592
+      ],
+      "id": "b72659ce-4089-4db5-b3c8-50c87849c176",
+      "name": "Confirmar registro3",
+      "webhookId": "57f22f8f-3d97-4299-9e0a-d432cb8d78bd",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "NCps3qyyYGco220t",
+          "name": "Gmail account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "documentId": {
+          "__rl": true,
+          "value": "1Smkp6ehhyqS3T5Wg0V9Cvynt46YILuRbUSLVKA-BPi8",
+          "mode": "list",
+          "cachedResultName": "Formulario_n8n_webhook",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1Smkp6ehhyqS3T5Wg0V9Cvynt46YILuRbUSLVKA-BPi8/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": 798601518,
+          "mode": "list",
+          "cachedResultName": "JS",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1Smkp6ehhyqS3T5Wg0V9Cvynt46YILuRbUSLVKA-BPi8/edit#gid=798601518"
+        },
+        "filtersUI": {
+          "values": [
+            {
+              "lookupColumn": "CC",
+              "lookupValue": "={{ $json.CC }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        784,
+        0
+      ],
+      "id": "46afbb71-a35f-41de-adc4-b724ec78d2f4",
+      "name": "Revisar DB3",
+      "alwaysOutputData": true,
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "yraDK6ysJzGMwSoY",
+          "name": "Google Sheets account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "documentId": {
+          "__rl": true,
+          "value": "1Smkp6ehhyqS3T5Wg0V9Cvynt46YILuRbUSLVKA-BPi8",
+          "mode": "list",
+          "cachedResultName": "Formulario_n8n_webhook",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1Smkp6ehhyqS3T5Wg0V9Cvynt46YILuRbUSLVKA-BPi8/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": 1341396507,
+          "mode": "list",
+          "cachedResultName": "HTML & CSS",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1Smkp6ehhyqS3T5Wg0V9Cvynt46YILuRbUSLVKA-BPi8/edit#gid=1341396507"
+        },
+        "filtersUI": {
+          "values": [
+            {
+              "lookupColumn": "Estado",
+              "lookupValue": "Activo"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        1296,
+        -176
+      ],
+      "id": "da326168-0e1e-4eaf-8ef4-6263e69cece8",
+      "name": "Consultar Cupos3",
+      "alwaysOutputData": true,
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "yraDK6ysJzGMwSoY",
+          "name": "Google Sheets account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "sendTo": "={{ $('LImpiar Datos').item.json.Email }}",
+        "subject": "Corfimacio del Formulario",
+        "message": "=<!DOCTYPE html>\n<html>\n<head>\n    <meta charset=\"UTF-8\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n</head>\n<body style=\"margin: 0; padding: 0; background-color: #07050D; font-family: -apple-system, BlinkMacSystemFont, sans-serif; -webkit-font-smoothing: antialiased;\">\n    \n    <table width=\"100%\" cellpadding=\"0\" cellspacing=\"0\" role=\"presentation\" style=\"background-color: #07050D; padding: 40px 20px;\">\n        <tr>\n            <td align=\"center\">\n                \n                <table width=\"100%\" cellpadding=\"0\" cellspacing=\"0\" role=\"presentation\" style=\"max-width: 500px; background-color: #0E0A14; border: 1px solid #36294C; border-radius: 14px; overflow: hidden; box-shadow: 0 8px 24px rgba(2, 1, 4, 0.6);\">\n                    <tr>\n                        <td align=\"center\" style=\"padding: 40px 30px;\">\n                            \n                            <!-- Icono de Error (Usa el color --color-error hsl(0, 75%, 60%) -> #E64D4D) -->\n                            <div style=\"width: 64px; height: 64px; border-radius: 50%; background-color: rgba(230, 77, 77, 0.12); display: inline-block; margin-bottom: 24px;\">\n                                <table width=\"100%\" height=\"100%\" cellpadding=\"0\" cellspacing=\"0\" role=\"presentation\">\n                                    <tr>\n                                        <td align=\"center\" valign=\"middle\">\n                                            <span style=\"color: #E64D4D; font-size: 28px; line-height: 64px; font-weight: bold;\">✕</span>\n                                        </td>\n                                    </tr>\n                                </table>\n                            </div>\n\n                            <h1 style=\"margin: 0 0 12px 0; color: #EDEAF0; font-size: 22px; font-weight: 700; letter-spacing: -0.02em;\">¡Cupos Agotados!</h1>\n\n                            <p style=\"margin: 0 0 32px 0; color: #8F8899; font-size: 15px; line-height: 1.6;\">\n                                Hola <strong>{{ $('LImpiar Datos').item.json.Nombre }}</strong>, lo sentimos mucho. El taller al que intentas inscribirte ya ha alcanzado su límite máximo de participantes y no podemos procesar tu registro.\n                            </p>\n\n                            <!-- Detalles Dinámicos del Registro -->\n                            <table width=\"100%\" cellpadding=\"0\" cellspacing=\"0\" role=\"presentation\" style=\"background-color: #0A070F; border-radius: 8px; margin-bottom: 32px;\">\n                                <tr>\n                                    <td style=\"padding: 20px;\">\n                                        <table width=\"100%\" cellpadding=\"0\" cellspacing=\"0\" role=\"presentation\">\n                                            <tr>\n                                                <td style=\"padding-bottom: 12px; color: #8F8899; font-size: 14px; border-bottom: 1px solid #36294C;\">Curso Solicitado:</td>\n                                                <td align=\"right\" style=\"padding-bottom: 12px; color: #E64D4D; font-size: 14px; font-weight: 600; text-transform: uppercase; border-bottom: 1px solid #36294C;\">{{ $('LImpiar Datos').item.json.Curso }}</td>\n                                            </tr>\n                                            <tr>\n                                                <td style=\"padding: 12px 0; color: #8F8899; font-size: 14px; border-bottom: 1px solid #36294C;\">Estado de Solicitud:</td>\n                                                <td align=\"right\" style=\"padding: 12px 0; color: #E64D4D; font-size: 14px; font-weight: 500; border-bottom: 1px solid #36294C;\">Rechazado - Sin cupos</td>\n                                            </tr>\n                                            <tr>\n                                                <td style=\"padding-top: 12px; color: #8F8899; font-size: 14px;\">Fecha de intento:</td>\n                                                <td align=\"right\" style=\"padding-top: 12px; color: #EDEAF0; font-size: 14px; font-weight: 500;\">{{ $now.format('MM-DD HH:mm') }}</td>\n                                            </tr>\n                                        </table>\n                                    </td>\n                                </tr>\n                            </table>\n\n                            <!-- Botón de Acción Funcional -->\n                            <table width=\"100%\" cellpadding=\"0\" cellspacing=\"0\" role=\"presentation\">\n                                <tr>\n                                    <td align=\"center\">\n                                        <!-- Redirige a ver otros cursos disponibles -->\n                                        <a href=\"https://alejandro-xoxo.github.io/Formulario-n8n/\" style=\"display: inline-block; background-color: #8D4DF0; color: #FFFFFF; font-size: 15px; font-weight: 600; text-decoration: none; padding: 14px 28px; border-radius: 8px;\">\n                                            Ver otros talleres\n                                        </a>\n                                    </td>\n                                </tr>\n                            </table>\n\n                        </td>\n                    </tr>\n                </table>\n                \n                <table width=\"100%\" cellpadding=\"0\" cellspacing=\"0\" role=\"presentation\" style=\"max-width: 500px; margin-top: 24px;\">\n                    <tr>\n                        <td align=\"center\" style=\"color: #635C6E; font-size: 12px;\">\n                            Si crees que esto es un error o deseas entrar a la lista de espera, responde a este correo.\n                        </td>\n                    </tr>\n                </table>\n\n            </td>\n        </tr>\n    </table>\n</body>\n</html>",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.2,
+      "position": [
+        1904,
+        -112
+      ],
+      "id": "c28f20cd-e84f-4cbe-abde-f92942da8bd0",
+      "name": "Confirmar registro4",
+      "webhookId": "57f22f8f-3d97-4299-9e0a-d432cb8d78bd",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "NCps3qyyYGco220t",
+          "name": "Gmail account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "sendTo": "={{ $('LImpiar Datos').item.json.Email }}",
+        "subject": "Corfimacio del Formulario",
+        "message": "=<!DOCTYPE html>\n<html>\n<head>\n    <meta charset=\"UTF-8\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n</head>\n<body style=\"margin: 0; padding: 0; background-color: #07050D; font-family: -apple-system, BlinkMacSystemFont, sans-serif; -webkit-font-smoothing: antialiased;\">\n    \n    <table width=\"100%\" cellpadding=\"0\" cellspacing=\"0\" role=\"presentation\" style=\"background-color: #07050D; padding: 40px 20px;\">\n        <tr>\n            <td align=\"center\">\n                \n                <table width=\"100%\" cellpadding=\"0\" cellspacing=\"0\" role=\"presentation\" style=\"max-width: 500px; background-color: #0E0A14; border: 1px solid #36294C; border-radius: 14px; overflow: hidden; box-shadow: 0 8px 24px rgba(2, 1, 4, 0.6);\">\n                    <tr>\n                        <td align=\"center\" style=\"padding: 40px 30px;\">\n                            \n                            <!-- Icono de Error (Usa el color --color-error hsl(0, 75%, 60%) -> #E64D4D) -->\n                            <div style=\"width: 64px; height: 64px; border-radius: 50%; background-color: rgba(230, 77, 77, 0.12); display: inline-block; margin-bottom: 24px;\">\n                                <table width=\"100%\" height=\"100%\" cellpadding=\"0\" cellspacing=\"0\" role=\"presentation\">\n                                    <tr>\n                                        <td align=\"center\" valign=\"middle\">\n                                            <span style=\"color: #E64D4D; font-size: 28px; line-height: 64px; font-weight: bold;\">✕</span>\n                                        </td>\n                                    </tr>\n                                </table>\n                            </div>\n\n                            <h1 style=\"margin: 0 0 12px 0; color: #EDEAF0; font-size: 22px; font-weight: 700; letter-spacing: -0.02em;\">¡Cupos Agotados!</h1>\n\n                            <p style=\"margin: 0 0 32px 0; color: #8F8899; font-size: 15px; line-height: 1.6;\">\n                                Hola <strong>{{ $('LImpiar Datos').item.json.Nombre }}</strong>, lo sentimos mucho. El taller al que intentas inscribirte ya ha alcanzado su límite máximo de participantes y no podemos procesar tu registro.\n                            </p>\n\n                            <!-- Detalles Dinámicos del Registro -->\n                            <table width=\"100%\" cellpadding=\"0\" cellspacing=\"0\" role=\"presentation\" style=\"background-color: #0A070F; border-radius: 8px; margin-bottom: 32px;\">\n                                <tr>\n                                    <td style=\"padding: 20px;\">\n                                        <table width=\"100%\" cellpadding=\"0\" cellspacing=\"0\" role=\"presentation\">\n                                            <tr>\n                                                <td style=\"padding-bottom: 12px; color: #8F8899; font-size: 14px; border-bottom: 1px solid #36294C;\">Curso Solicitado:</td>\n                                                <td align=\"right\" style=\"padding-bottom: 12px; color: #E64D4D; font-size: 14px; font-weight: 600; text-transform: uppercase; border-bottom: 1px solid #36294C;\">{{ $('LImpiar Datos').item.json.Curso }}</td>\n                                            </tr>\n                                            <tr>\n                                                <td style=\"padding: 12px 0; color: #8F8899; font-size: 14px; border-bottom: 1px solid #36294C;\">Estado de Solicitud:</td>\n                                                <td align=\"right\" style=\"padding: 12px 0; color: #E64D4D; font-size: 14px; font-weight: 500; border-bottom: 1px solid #36294C;\">Rechazado - Sin cupos</td>\n                                            </tr>\n                                            <tr>\n                                                <td style=\"padding-top: 12px; color: #8F8899; font-size: 14px;\">Fecha de intento:</td>\n                                                <td align=\"right\" style=\"padding-top: 12px; color: #EDEAF0; font-size: 14px; font-weight: 500;\">{{ $now.format('MM-DD HH:mm') }}</td>\n                                            </tr>\n                                        </table>\n                                    </td>\n                                </tr>\n                            </table>\n\n                            <!-- Botón de Acción Funcional -->\n                            <table width=\"100%\" cellpadding=\"0\" cellspacing=\"0\" role=\"presentation\">\n                                <tr>\n                                    <td align=\"center\">\n                                        <!-- Redirige a ver otros cursos disponibles -->\n                                        <a href=\"https://alejandro-xoxo.github.io/Formulario-n8n/\" style=\"display: inline-block; background-color: #8D4DF0; color: #FFFFFF; font-size: 15px; font-weight: 600; text-decoration: none; padding: 14px 28px; border-radius: 8px;\">\n                                            Ver otros talleres\n                                        </a>\n                                    </td>\n                                </tr>\n                            </table>\n\n                        </td>\n                    </tr>\n                </table>\n                \n                <table width=\"100%\" cellpadding=\"0\" cellspacing=\"0\" role=\"presentation\" style=\"max-width: 500px; margin-top: 24px;\">\n                    <tr>\n                        <td align=\"center\" style=\"color: #635C6E; font-size: 12px;\">\n                            Si crees que esto es un error o deseas entrar a la lista de espera, responde a este correo.\n                        </td>\n                    </tr>\n                </table>\n\n            </td>\n        </tr>\n    </table>\n</body>\n</html>",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.2,
+      "position": [
+        1648,
+        -512
+      ],
+      "id": "46538c5e-3be4-4f14-ae70-a3faf37b95fc",
+      "name": "Confirmar registro5",
+      "webhookId": "57f22f8f-3d97-4299-9e0a-d432cb8d78bd",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "NCps3qyyYGco220t",
+          "name": "Gmail account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "append",
+        "documentId": {
+          "__rl": true,
+          "value": "1Smkp6ehhyqS3T5Wg0V9Cvynt46YILuRbUSLVKA-BPi8",
+          "mode": "list",
+          "cachedResultName": "Formulario_n8n_webhook",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1Smkp6ehhyqS3T5Wg0V9Cvynt46YILuRbUSLVKA-BPi8/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": 1341396507,
+          "mode": "list",
+          "cachedResultName": "HTML & CSS",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1Smkp6ehhyqS3T5Wg0V9Cvynt46YILuRbUSLVKA-BPi8/edit#gid=1341396507"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "Nombre": "={{ $('LImpiar Datos').item.json.Nombre }}",
+            "CC": "={{ $('LImpiar Datos').item.json.CC }}",
+            "Celular": "={{ $('LImpiar Datos').item.json.Celular }}",
+            "Email": "={{ $('LImpiar Datos').item.json.Email }}",
+            "Curso": "={{ $('LImpiar Datos').item.json.Curso }}",
+            "Estado": "Activo"
+          },
+          "matchingColumns": [],
+          "schema": [
+            {
+              "id": "Nombre",
+              "displayName": "Nombre",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "CC",
+              "displayName": "CC",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Email",
+              "displayName": "Email",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Celular",
+              "displayName": "Celular",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Curso",
+              "displayName": "Curso",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Estado",
+              "displayName": "Estado",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        1632,
+        -704
+      ],
+      "id": "d21d7d66-27be-4ce7-826d-ec460114d0f5",
+      "name": "Agregar a DB",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "yraDK6ysJzGMwSoY",
+          "name": "Google Sheets account"
+        }
+      }
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "If": {
+      "main": [
+        [
+          {
+            "node": "Consultar Cupos",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Rechazo por duplicidad",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Fromulaario": {
+      "main": [
+        [
+          {
+            "node": "LImpiar Datos",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "LImpiar Datos": {
+      "main": [
+        [
+          {
+            "node": "Switch",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Revisar DB": {
+      "main": [
+        [
+          {
+            "node": "If",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Switch": {
+      "main": [
+        [
+          {
+            "node": "Revisar DB",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Revisar DB3",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Revisar DB2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Confirmar registro": {
+      "main": [
+        []
+      ]
+    },
+    "Consultar Cupos": {
+      "main": [
+        [
+          {
+            "node": "Code in JavaScript",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If1": {
+      "main": [
+        [
+          {
+            "node": "Agregar a DB",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Confirmar registro5",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code in JavaScript": {
+      "main": [
+        [
+          {
+            "node": "If1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If2": {
+      "main": [
+        [
+          {
+            "node": "Consultar Cupos3",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Rechazo por duplicidad1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Agregar a DB1": {
+      "main": [
+        [
+          {
+            "node": "Confirmar registro1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If3": {
+      "main": [
+        [
+          {
+            "node": "Agregar a DB1",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Confirmar registro4",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code in JavaScript1": {
+      "main": [
+        [
+          {
+            "node": "If3",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If4": {
+      "main": [
+        [
+          {
+            "node": "Consultar Cupos2",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Rechazo por duplicidad2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Agregar a DB2": {
+      "main": [
+        [
+          {
+            "node": "Confirmar registro2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Revisar DB2": {
+      "main": [
+        [
+          {
+            "node": "If4",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Consultar Cupos2": {
+      "main": [
+        [
+          {
+            "node": "Code in JavaScript2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If5": {
+      "main": [
+        [
+          {
+            "node": "Agregar a DB2",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Confirmar registro3",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code in JavaScript2": {
+      "main": [
+        [
+          {
+            "node": "If5",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Revisar DB3": {
+      "main": [
+        [
+          {
+            "node": "If2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Consultar Cupos3": {
+      "main": [
+        [
+          {
+            "node": "Code in JavaScript1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Agregar a DB": {
+      "main": [
+        [
+          {
+            "node": "Confirmar registro",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate",
+    "availableInMCP": false
+  },
+  "versionId": "b6c7723a-b645-4c07-a143-6e4bccbcd991",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "0cc5342dec770092d509768c65df0d92018312427cf3945d5dc5a2d508b4f707"
+  },
+  "nodeGroups": [],
+  "id": "cj823D0UStOdIliJ",
+  "tags": []
+}
