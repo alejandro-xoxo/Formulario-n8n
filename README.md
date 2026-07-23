@@ -5,9 +5,9 @@
 > 💡 **¡El flujo de n8n está activo!** Puedes entrar a la página, llenar el formulario y probar el envío de datos sin necesidad de descargar ni instalar nada localmente. Los datos enviados se pueden ver en la hoja de control enlazada arriba.
 > 
 > **Cupos configurados para las pruebas de n8n:**
-> - 🐍 **Python Básico:** 2 cupos
-> - ⚡ **JavaScript:** 8 cupos
-> - 🌐 **HTML & CSS:** 10 cupos
+> - 🐍 **Python Básico:** 2 cupos 2/2 Lleno
+> - ⚡ **JavaScript:** 8 cupos     6/8
+> - 🌐 **HTML & CSS:** 10 cupos   0/10
 
 Este documento detalla el paso a paso seguido para la construcción de la landing page de inscripción y su respectiva conexión a un webhook. Para cada etapa del desarrollo, se incluye el **prompt** que puedes copiar y pegar para replicar o generar cada parte del proyecto utilizando Inteligencia Artificial.
 
