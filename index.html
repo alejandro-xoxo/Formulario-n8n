@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Inscripción a Talleres – Fundación CodeFuturo</title>
+  <meta name="description" content="Inscríbete en los talleres gratuitos de programación de la Fundación CodeFuturo. Cupos limitados con confirmación inmediata." />
+  <link rel="stylesheet" href="style.css" />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🚀</text></svg>" />
+</head>
+<body>
+  <div class="app-wrapper">
+
+    <!-- ═══════ HEADER ═══════ -->
+    <header class="site-header">
+      <div class="container">
+        <div class="header-inner">
+          <div class="logo-icon" aria-hidden="true">🚀</div>
+          <div>
+            <div class="logo-text">Fundación CodeFuturo</div>
+            <div class="logo-sub">Talleres gratuitos de programación</div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main>
+      <!-- ═══════ HERO ═══════ -->
+      <section class="hero">
+        <div class="container">
+          <div class="hero-badge">
+            <span class="dot"></span>
+            Inscripciones abiertas — Julio 2026
+          </div>
+          <h1>Aprende a programar<br /><span class="gradient-text">gratis y sin barreras</span></h1>
+          <p>Completa el formulario y recibe confirmación inmediata. Sin WhatsApp, sin esperas.</p>
+        </div>
+      </section>
+
+      <!-- ═══════ WORKSHOP CARDS ═══════ -->
+      <section class="workshops-section" aria-label="Talleres disponibles">
+        <div class="container">
+          <h2>Talleres disponibles</h2>
+          <div class="workshop-cards" id="workshopCards">
+            <!-- Rendered by JS -->
+          </div>
+        </div>
+      </section>
+
+      <!-- ═══════ REGISTRATION FORM ═══════ -->
+      <section class="form-section" id="formulario">
+        <div class="container">
+          <div class="form-card">
+            <h2>Formulario de inscripción</h2>
+            <p class="form-subtitle">Todos los campos son obligatorios. Recibirás respuesta al instante.</p>
+
+            <form id="registrationForm" novalidate>
+              <div class="form-group">
+                <label for="nombre">Nombre completo</label>
+                <input type="text" id="nombre" class="form-input" placeholder="Ej: María García López" autocomplete="name" required />
+                <div class="field-error" id="error-nombre">⚠ Por favor ingresa tu nombre completo</div>
+              </div>
+
+              <div class="form-group">
+                <label for="documento">Número de documento</label>
+                <input type="text" id="documento" class="form-input" placeholder="Ej: 1234567890" inputmode="numeric" autocomplete="off" required />
+                <div class="field-error" id="error-documento">⚠ Ingresa un documento válido (solo números)</div>
+              </div>
+
+              <div class="form-group">
+                <label for="correo">Correo electrónico</label>
+                <input type="email" id="correo" class="form-input" placeholder="Ej: maria@correo.com" autocomplete="email" required />
+                <div class="field-error" id="error-correo">⚠ Ingresa un correo electrónico válido</div>
+              </div>
+
+              <div class="form-group">
+                <label for="telefono">Teléfono</label>
+                <input type="tel" id="telefono" class="form-input" placeholder="Ej: 3001234567" inputmode="tel" autocomplete="tel" required />
+                <div class="field-error" id="error-telefono">⚠ Ingresa un número de teléfono válido</div>
+              </div>
+
+              <div class="form-group">
+                <label for="taller">Taller elegido</label>
+                <select id="taller" class="form-select" required>
+                  <option value="" disabled selected>Selecciona un taller</option>
+                  <!-- Options rendered by JS -->
+                </select>
+                <div class="field-error" id="error-taller">⚠ Por favor selecciona un taller</div>
+              </div>
+
+              <button type="submit" class="btn-submit" id="btnSubmit">
+                <span class="btn-text">Inscribirme ahora</span>
+              </button>
+            </form>
+          </div>
+        </div>
+      </section>
+
+      <!-- ═══════ STATS COUNTERS ═══════ -->
+      <section class="stats-section" aria-label="Estadísticas">
+        <div class="container">
+          <div class="stats-grid">
+            <div class="stat-card">
+              <div class="stat-number" data-target="500">0</div>
+              <div class="stat-label">Estudiantes formados</div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-number" data-target="24">0</div>
+              <div class="stat-label">Talleres realizados</div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-number" data-target="98" data-suffix="%">0%</div>
+              <div class="stat-label">Satisfacción</div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-number" data-target="100" data-suffix="%">0%</div>
+              <div class="stat-label">Gratuito</div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- ═══════ PARTICLES CANVAS ═══════ -->
+    <canvas id="particlesCanvas" aria-hidden="true"></canvas>
+
+    <!-- ═══════ FOOTER ═══════ -->
+    <footer class="site-footer">
+      <div class="container">
+        <p>© 2026 Fundación CodeFuturo · Hecho con 💜 para la comunidad</p>
+      </div>
+    </footer>
+  </div>
+
+  <!-- ═══════ RESPONSE MODAL ═══════ -->
+  <div class="response-overlay" id="responseOverlay" role="dialog" aria-modal="true" aria-labelledby="responseTitle">
+    <div class="response-modal">
+      <div class="response-icon" id="responseIcon"></div>
+      <h3 class="response-title" id="responseTitle"></h3>
+      <p class="response-message" id="responseMessage"></p>
+      <div class="response-details" id="responseDetails" style="display:none;"></div>
+      <button class="btn-close-modal" id="btnCloseModal">Entendido</button>
+    </div>
+  </div>
+
+  <!-- ═══════ EMAIL TOAST ═══════ -->
+  <div class="email-toast" id="emailToast" role="status" aria-live="polite">
+    <div class="toast-icon">📧</div>
+    <div>
+      <div class="toast-title">Correo de bienvenida enviado</div>
+      <div class="toast-body" id="toastBody"></div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
