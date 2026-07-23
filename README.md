@@ -4,9 +4,9 @@
 > 💡 **Arquitectura del Proyecto:** Esta landing page funciona como un "embudo" visual que capta los datos del usuario y los envía directamente a un flujo de automatización en n8n mediante un webhook. Desde n8n, los datos se procesan (validando cupos disponibles) y se registran en una hoja de cálculo privada de Google Sheets.
 > 
 > **Cupos configurados en el sistema:**
-> - 🐍 **Python Básico:** 2 cupos
-> - ⚡ **JavaScript:** 8 cupos
-> - 🌐 **HTML & CSS:** 10 cupos
+> - 🐍 **Python Básico:** 2 cupos   **2/2 Lleno para la comprobacio de cupos**
+> - ⚡ **JavaScript:** 8 cupos       **6/8**
+> - 🌐 **HTML & CSS:** 10 cupos     **0/10 Para pruebas**
 
 Este documento detalla el paso a paso seguido para la construcción de la landing page de inscripción y su respectiva conexión a un webhook. Para cada etapa del desarrollo, se incluye el **prompt** que puedes copiar y pegar para replicar o generar cada parte del proyecto utilizando Inteligencia Artificial.
 
