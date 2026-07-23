@@ -1,13 +1,12 @@
 # Proyecto: Sistema de Inscripción - Fundación CodeFuturo 🚀
 
 **🔗 Link al proyecto funcional:** [https://alejandro-xoxo.github.io/Formulario-n8n/](https://alejandro-xoxo.github.io/Formulario-n8n/)
-**📊 Hoja de Control (Google Sheets):** [Ver base de datos generada](https://docs.google.com/spreadsheets/d/1Smkp6ehhyqS3T5Wg0V9Cvynt46YILuRbUSLVKA-BPi8/edit?usp=sharing)
-> 💡 **¡El flujo de n8n está activo!** Puedes entrar a la página, llenar el formulario y probar el envío de datos sin necesidad de descargar ni instalar nada localmente. Los datos enviados se pueden ver en la hoja de control enlazada arriba.
+> 💡 **Arquitectura del Proyecto:** Esta landing page funciona como un "embudo" visual que capta los datos del usuario y los envía directamente a un flujo de automatización en n8n mediante un webhook. Desde n8n, los datos se procesan (validando cupos disponibles) y se registran en una hoja de cálculo privada de Google Sheets.
 > 
-> **Cupos configurados para las pruebas de n8n:**
-> - 🐍 **Python Básico:** 2 cupos 2/2 Lleno
-> - ⚡ **JavaScript:** 8 cupos     6/8
-> - 🌐 **HTML & CSS:** 10 cupos   0/10
+> **Cupos configurados en el sistema:**
+> - 🐍 **Python Básico:** 2 cupos
+> - ⚡ **JavaScript:** 8 cupos
+> - 🌐 **HTML & CSS:** 10 cupos
 
 Este documento detalla el paso a paso seguido para la construcción de la landing page de inscripción y su respectiva conexión a un webhook. Para cada etapa del desarrollo, se incluye el **prompt** que puedes copiar y pegar para replicar o generar cada parte del proyecto utilizando Inteligencia Artificial.
 
@@ -71,7 +70,7 @@ Añade la lógica funcional en Vanilla JavaScript para el formulario de inscripc
 
 **Prompt utilizado / sugerido:**
 ```text
-Conecta el formulario principal de esta vista al siguiente endpoint (Webhook de n8n): https://miguel0328.app.n8n.cloud/webhook/1112091381092h12u13ui2bjk3b1km23k1ñ3k1pom3ñl1m23ñm1ñ3m. Requisitos de implementación en Vanilla JS: 
+Conecta el formulario principal de esta vista a tu propio endpoint (Webhook de n8n): https://tu-instancia.app.n8n.cloud/webhook/tu-webhook-id. Requisitos de implementación en Vanilla JS: 
 Identifica el ID del formulario y agrega un 'Event Listener' para interceptar el 'submit' usando e.preventDefault(). Extrae los valores de los inputs existentes y construye un objeto de datos (payload). Ejecuta una petición HTTP POST hacia la URL indicada utilizando la API fetch nativa. Define el header 'Content-Type': 'application/json' y serializa el payload en el body. Implementa un bloque try/catch para el control de la promesa. Gestiona el estado de la interfaz: deshabilita el botón de envío mientras se resuelve la petición e inserta el modal de éxito (con confeti) o error en el DOM al finalizar.
 ```
 
