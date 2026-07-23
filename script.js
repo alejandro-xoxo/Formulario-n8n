@@ -134,7 +134,7 @@ form.addEventListener('submit', async (e) => {
   };
 
   try {
-    const response = await fetch('https://miguel0328.app.n8n.cloud/webhook-test/1112091381092h12u13ui2bjk3b1km23k1ñ3k1pom3ñl1m23ñm1ñ3m', {
+    const response = await fetch('https://miguel0328.app.n8n.cloud/webhook/1112091381092h12u13ui2bjk3b1km23k1ñ3k1pom3ñl1m23ñm1ñ3m', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
